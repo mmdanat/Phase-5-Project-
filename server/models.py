@@ -24,7 +24,7 @@ class User(db.Model, SerializerMixin):
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     email_address = db.Column(db.String)
-    username = db.Column(db.String)
+    username = db.Column(db.String, unique=True)
     created_at = db.Column(db.DateTime,server_default =db.func.now())
 
     #Relationship
@@ -36,19 +36,30 @@ class User(db.Model, SerializerMixin):
 
     #validations 
     @validates('username')
-    def validates_title(self,key,username):
-        if username > 0 and not hasattr(username):
+    def validates_username(self,key,username):
+        #print(username)
+        if len(username) > 0 :
             return username
         else:
             raise ValueError('must be a unique username and be greater than 0 characters')
+        
+
+    @validates('email_address')
+    def validates_mail_address(self,key,email_address):
+        #print(username)
+        if len(email_address) > 0 :
+            return email_address
+        else:
+            raise ValueError('must enter email address that is greater than 0 characters ')
 
 
 class Post(db.Model,SerializerMixin):
     __tablename__ = 'posts'
 
     id = db.Column(db.Integer, primary_key= True)
-    title = db.Column(db.String)
+    title = db.Column(db.String,nullable=False)
     body = db.Column(db.String)
+    image = db.Column(db.String)
     likes =db.Column(db.Integer)
     
 
@@ -60,16 +71,6 @@ class Post(db.Model,SerializerMixin):
 
     serialize_rules = ('-user.posts','-category.posts')
 
-
-    #validations 
-
-    @validates('title')
-    def validates_title(self,key,title):
-        if title is not None:
-            return title 
-        else:
-            raise ValueError('must be a title')
-   
 
 
 class Comment(db.Model,SerializerMixin):
@@ -84,7 +85,10 @@ class Comment(db.Model,SerializerMixin):
     # posts = db.relationship('Post', backref='comment')
 
 
+
     #seralize_rules 
     serialize_rules = ('-posts.comment')
+
+
 
 

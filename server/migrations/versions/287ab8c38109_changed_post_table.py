@@ -1,8 +1,8 @@
-"""tables
+"""changed post table
 
-Revision ID: 3172a4d32277
+Revision ID: 287ab8c38109
 Revises: 
-Create Date: 2023-07-25 11:34:04.623431
+Create Date: 2023-07-26 13:37:51.047470
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3172a4d32277'
+revision = '287ab8c38109'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,11 +30,12 @@ def upgrade():
     sa.Column('email_address', sa.String(), nullable=True),
     sa.Column('username', sa.String(), nullable=True),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('username')
     )
     op.create_table('posts',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.String(), nullable=True),
+    sa.Column('title', sa.String(), nullable=False),
     sa.Column('body', sa.String(), nullable=True),
     sa.Column('likes', sa.Integer(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),

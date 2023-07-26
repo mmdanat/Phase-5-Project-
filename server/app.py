@@ -50,7 +50,7 @@ class Posts(Resource):
             try:
                 request_json = request.get_json()
 
-                # username = request_json['username']
+                # username = request_json['username'] Will need to insert this when I have the front end running 
                 # user_row = User.query.filter(User.username == username).first()
                 # user_id_match = user_row.id
 
@@ -79,7 +79,34 @@ class Posts(Resource):
                 
                 return response 
             
+    def patch(self): #maybe this is for the like button ?
 
+        all_posts = [post.to_dict() for post in Post.query.all()]
+
+        if all_posts:
+
+            try:
+            
+                request_json = request.get_json()
+
+                for key in request_json:
+                    setattr(all_posts,key,request_json[key])
+
+                    db.session.add(all_posts)
+                    db.session.commit()
+                
+                response = make_response(all_posts.to_dict(),200)
+
+                return response 
+
+
+            except ValueError:
+
+                response= make_response({"errors": ["validation errors"]},400)
+                
+                return response 
+
+            
     
 api.add_resource(Posts,'/all_posts')
 
@@ -118,7 +145,19 @@ class PostsbyID(Resource):
                 
                 return response 
             
-    
+
+    def delete(self,id):
+
+        posts_by_id = Post.query.filter(Post.id == id).first()
+
+        db.session.delete(posts_by_id)
+        db.session.commit()
+
+
+        response = make_response('sucessfully deleted', 204)
+
+        return response 
+
 
 
     
