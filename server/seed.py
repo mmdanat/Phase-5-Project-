@@ -21,7 +21,7 @@ with app.app_context():
     db.session.commit()
 
 
-    post1 = Post(user_id = u1.id, title = "this is great", body = "5 cups sugar , 1 cup milk , 2 cups oil !",likes = 0 , category_id = category1.id)
+    post1 = Post(user_id = u1.id, title = "hello", body = "5 cups sugar , 1 cup milk , 2 cups oil !",likes = 0 , category_id = category1.id)
     
     db.session.add(post1)
     db.session.commit()
