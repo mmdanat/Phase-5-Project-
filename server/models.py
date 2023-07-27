@@ -25,6 +25,7 @@ class User(db.Model, SerializerMixin):
     last_name = db.Column(db.String)
     email_address = db.Column(db.String)
     username = db.Column(db.String, unique=True)
+    _password_hash =db.Column(db.String)
     created_at = db.Column(db.DateTime,server_default =db.func.now())
 
     #Relationship

@@ -1,4 +1,4 @@
-from flask import Flask,jsonify,make_response,request
+from flask import Flask,jsonify,make_response,request,session
 from flask_migrate import Migrate
 from models import db,User,Post,Comment,Category
 from flask_restful import Api, Resource
@@ -23,16 +23,15 @@ def index():
 
 
 
-class Users(Resource):
-    def get(self):
+class UsersByID(Resource):
+    def get(self,id):
+        users_by_id = User.query.filter(User.id == id).first()
 
-        all_users = [user.to_dict(rules = ('-posts',)) for user in User.query.all()]
-
-        response = make_response (all_users, 200)
+        response = make_response (users_by_id.to_dict(rules = ('-posts',)), 200)
 
         return response 
     
-api.add_resource(Users, '/user')
+api.add_resource(UsersByID, '/user/<int:id>')
 
 
 
@@ -163,4 +162,22 @@ class PostsbyID(Resource):
     
 api.add_resource(PostsbyID,'/posts/<int:id>')
 
+
+class Login(Resource):
+    def get(self):
+        pass
+
+
+
+
+
+    def post(self):
+        user = User.query.filter(User.username == request.get_json()['username']).first()
+
+        session['user_id'] = user.id
+
+        return user.to_dict()
+
+
+api.add_resource(Login,'/login')
 
