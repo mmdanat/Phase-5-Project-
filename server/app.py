@@ -6,6 +6,8 @@ from flask_cors import CORS
 
 app =Flask(__name__)
 
+app.secret_key = "ABC!@#"
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -163,21 +165,51 @@ class PostsbyID(Resource):
 api.add_resource(PostsbyID,'/posts/<int:id>')
 
 
-class Login(Resource):
+class CheckSession(Resource):
     def get(self):
-        pass
+        user_id = session.get('user_id')
 
+        
+        if user_id:
 
+            user_row = User.query.filter(User.id == session.get('user_id')).first()
+            response = make_response(user_row.to_dict() ,200)
+            return response 
+        else:
+            response = make_response({'message': '401: Not Authorized'}, 401)
+            return response 
+        
+api.add_resource(CheckSession, '/check_session')
 
-
-
+class Login(Resource):   
     def post(self):
-        user = User.query.filter(User.username == request.get_json()['username']).first()
 
-        session['user_id'] = user.id
+        username = request.get_json()['username']
 
-        return user.to_dict()
+        user_row = User.query.filter(User.username == username).first()
 
+        if user_row:
+            session['user_id'] = user_row.id
+
+            response = make_response( user_row.to_dict(), 201)
+
+            return response 
+        else:
+
+            response = make_response ({},404)
+
+            return response 
 
 api.add_resource(Login,'/login')
+
+
+class Logout(Resource):
+    def delete(self):
+        session['user_id'] =None
+        
+        response = make_response({} ,204)
+        
+        return response 
+    
+api.add_resource(Logout, '/logout')
 
