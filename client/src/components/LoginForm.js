@@ -1,8 +1,54 @@
+import { Link ,useNavigate} from "react-router-dom";
+import { useEffect,useState} from 'react';
 
 
-function LoginForm({handleLogin}){
+function LoginForm({setUser}){
+    const navigate = useNavigate()
+
+  //   useEffect(()=> {
+  //   fetch("/check_session").then((resp) => {
+  //     if (resp.ok){
+  //       resp.json().then((user) =>setUser(user))
+  //     }
+  //   });
+  // },[]);
+
+    function handleLogin(e){
+        e.preventDefault()
+        
+    
+        let username = e.target.username.value;
+        let password = e.target.password.value;
+    
+        fetch('/login',{
+          method:"POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body:JSON.stringify({username,password}),
+        })
+          .then((resp) =>{
+            if (resp.ok) {
+              
+              resp.json().then((user) => {
+                setUser(user)
+                navigate('/all_posts')
+            })
+                 
+            }else {
+                return(
+                window.alert("Invalid username or password ") 
+                )
 
 
+            }
+           
+            
+          });  
+      }
+
+
+    
     return (
         <div className = "flex flex-col items-center justify-center px-6 py-8 mx-auto border-black">
             <a className = 'flex items-center mb-6 text-2xl text-grey-900 border-solid'>

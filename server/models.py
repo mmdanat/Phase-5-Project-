@@ -1,8 +1,11 @@
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.orm import validates
+from sqlalchemy.ext.hybrid import hybrid_property
+from config import bcrypt,db
 
-db = SQLAlchemy()
+
+# db = SQLAlchemy()
 
 
 class Category(db.Model,SerializerMixin):
@@ -33,6 +36,23 @@ class User(db.Model, SerializerMixin):
 
     #seraliaze_rules 
     serialize_rules = ('-posts.user',)
+
+    #username_property
+
+    @hybrid_property
+    def password_hash(self):
+        raise Exception("Hashed Password")
+    
+    @password_hash.setter
+    def password_hash(self, password):
+        password_hash = bcrypt.generate_password_hash(password.encode('utf-8')) 
+        self._password_hash = password_hash.decode('utf-8')
+
+    
+    def authenticate(self,password):
+        return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8')) 
+
+
 
 
     #validations 
