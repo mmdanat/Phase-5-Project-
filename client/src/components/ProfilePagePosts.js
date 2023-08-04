@@ -1,10 +1,13 @@
 import {useNavigate, useParams} from "react-router-dom"
+import { useEffect,useState} from 'react';
 
 
-function UserPagePosts({title,body,image,likes,id}){
-
+function ProfilePagePosts({title,body,image,likes,id,handleEdit,post,setPosts}){
+    
+    
     const navigate = useNavigate()
-  
+    // const {id} = useParams();
+    
     function handleClick(){
         
         fetch(`/posts/${id}`,{
@@ -16,24 +19,35 @@ function UserPagePosts({title,body,image,likes,id}){
     }
 
 
-    function handlePatchClick(){
-     
-       navigate(`/posts/${id}/edit`)
+
+    // useEffect(()=>{
+    //     fetch(`/posts/${id}`)
+    //         .then((resp) =>resp.json())
+    //         .then(posts => setPosts(posts))
+
         
-       }
+    // },[])
+
+
+    // function handlePatchClick(){
+     
+    //    navigate(`/posts/${id}/edit`)
+        
+    //    }
     
 
     return(
         <div className=''>
            
             <div className=''> Post Title:{title}</div>
+            <img className ='' src = {image} alt = {title}/>
             <p className=''> Post body:{body}</p>
             <p className=''> Likes:{likes}</p>
             <div><button onClick = {handleClick}>Delete Post</button></div>
-            <div><button onClick = {handlePatchClick}>Edit Post</button></div>
+            <div><button onClick={() => handleEdit(post)}>Edit Post</button></div>
         
         </div>
     )
 
 }
-export default UserPagePosts;
+export default ProfilePagePosts;

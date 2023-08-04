@@ -1,24 +1,33 @@
-import { useEffect,useState} from 'react';
+import { useEffect,useState,createContext,useContext} from 'react';
 import { Routes, Route,useNavigate} from 'react-router-dom'
 
 
 import LoginForm from './LoginForm';
 import Landing from './Landing';
 import Logout from './Logout';
-import PostsPage from './PostsPage';
+import AllPostsPage from './AllPostsPage';
 import ProfilePage from './ProfilePage';
 import NavBar from './NavBar';
 import CreateNewPostForm from './CreateNewPostForm';
 import EditPostForm from './EditPostForm';
+import SignUpForm from './SignUpForm';
 
 
-
+export const UserContext = createContext();
 
 function App() {
 
+  const navigate = useNavigate()
+  // const UserContext = createContext()
+  
+ 
+
   const [posts,setPosts] =useState([])
   const [user,setUser] = useState("")
-  // console.log(user)
+  const [postToEdit, setPostToEdit] = useState(null)
+  const [signedIn, setSignedIn] = useState(false)
+
+  console.log(user)
 
   // useEffect(()=> {
   //   fetch("/check_session").then((resp) => {
@@ -32,9 +41,32 @@ function App() {
     .then((response) => response.json())
     .then((posts) => setPosts(posts));
   },[])
+  
 
   const addPost = (post) => {
-    setPosts(posts => [...posts,post])
+    setPosts(posts => [post,...posts])
+  }
+
+  const addUser = (new_user) => {
+    setUser(user => [new_user,...user])
+  }
+
+  const handleEdit = (posts) => {
+    setPostToEdit(posts)
+    navigate(`/posts/${posts.id}/edit`)
+
+  }
+ 
+  
+  const updatePost = (postToEdit) => {
+    setPosts(posts => posts.map((post)=>{
+      if (post.id = postToEdit.id){
+        return postToEdit
+      }else{
+        return post
+      }
+
+    }))
   }
   
   
@@ -43,8 +75,12 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar user = {user}/>
-      <Logout setUser = {setUser}/>
+      <UserContext.Provider value = {[user ,signedIn, setSignedIn]}>
+        <NavBar user ={user} />
+        <Logout setUser = {setUser}/>
+      </UserContext.Provider>
+      {/* <NavBar user = {user}/>
+      <Logout setUser = {setUser}/> */}
 
       <Routes>
         
@@ -54,15 +90,22 @@ function App() {
           exact path = '/login'
           element = {<LoginForm setUser = {setUser} user = {user}/>}
         />
-        <Route
-          exact path = '/all_posts'
-          element = {<PostsPage posts = {posts} setUser = {setUser}/> }
-        />
 
         <Route
-          exact path = {`/user/:user`}
-          element = {<ProfilePage user = {user} setUser = {setUser} />}
+          exact path = '/users/new'
+          element = {<SignUpForm addUser = {addUser}/>}
+        
         />
+        <Route
+          exact path = '/all_posts'
+          element = {<AllPostsPage posts = {posts} setUser = {setUser}/> }
+        />
+        
+        <Route
+          exact path = {`/user/:user`}
+          element = {<ProfilePage user = {user} setUser = {setUser} handleEdit = {handleEdit} posts = {posts} setPosts ={setPosts} />}
+        />
+        
 
 
         <Route
@@ -73,11 +116,8 @@ function App() {
 
         <Route
           exact path = '/posts/:post/edit'
-          element = {<EditPostForm/>}
+          element = {<EditPostForm postToEdit = {postToEdit} updatePost = {updatePost}/>}
         />
-
-
-    
 
       </Routes>
       
@@ -89,3 +129,5 @@ function App() {
 }
 
 export default App;
+
+

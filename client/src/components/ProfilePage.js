@@ -1,33 +1,39 @@
 import { useEffect} from 'react';
 import {useNavigate, useParams} from "react-router-dom"
-import UserPagePosts from './UserPagePosts';
+import ProfilePagePosts from './ProfilePagePosts';
 import NavBar from './NavBar';
 
 
 
 
-function ProfilePage({user, setUser}){
+function ProfilePage({user, setUser, handleEdit,posts,setPosts}){
     const navigate = useNavigate()
     const params = useParams();
+    console.log(user)
+    
 
     useEffect(() => {
         fetch(`/user/${params.user}`)
         .then((resp) => resp.json())
         .then((user) => setUser(user))
+        
 
     },[]) 
-   
+    console.log(user)
     let render_user_posts = []
     if (user) {
         const users_posts = user.posts 
         render_user_posts = users_posts.map((item) => 
-        <UserPagePosts
+        <ProfilePagePosts
             key ={item.id}
             id = {item.id}
             title = {item.title}
             body = {item.body}
             image = {item.image}
-            likes = {item.likes}/>
+            likes = {item.likes}
+            handleEdit = {handleEdit}
+            post = {item}
+            />
         )
 
     }else {
@@ -40,16 +46,15 @@ function ProfilePage({user, setUser}){
 
    }
 
-   
-   
-       
+  
     return(
 
         <div>
             {/* <NavBar/> */}
-            {`Hello ${user.first_name}`}
+            {/* {`Hello ${user.first_name}`} */}
             <div><button onClick = {handleClick}>Create Post</button></div>
             {render_user_posts}
+            
             
             
 

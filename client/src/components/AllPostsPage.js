@@ -1,7 +1,7 @@
 import AllPostsCards from "./AllPostsCards";
 import NavBar from "./NavBar";
 
-function PostsPage({posts}){
+function AllPostsPage({posts}){
 
 
     const renderposts = posts.map((post)=> 
@@ -24,4 +24,4 @@ function PostsPage({posts}){
     )
 }
 
-export default PostsPage;
+export default AllPostsPage;
