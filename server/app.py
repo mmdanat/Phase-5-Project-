@@ -24,6 +24,44 @@ class UsersByID(Resource):
     
 api.add_resource(UsersByID, '/user/<int:id>')
 
+class Users(Resource):
+    def get(self):
+        all_users = [user.to_dict() for user in User.query.all()]
+
+        response = make_response (all_users,200)
+
+        return response 
+    
+    def post(self):
+        
+        try:
+            request_json = request.get_json()
+            
+            new_user = User(
+                first_name = request_json['first_name'],
+                last_name = request_json['last_name'],
+                email_address = request_json['email_address'],
+                username = request_json['username'],
+                
+            )
+            
+            db.session.add(new_user)
+            db.session.commit()
+            new_password = request_json['password']
+            new_user.password_hash = new_password
+            db.session.add(new_user)
+            db.session.commit()
+
+            response = make_response(new_user.to_dict(),200)
+            return response 
+            
+        except ValueError:
+            response= make_response({"errors": ["validation errors"]},400)
+                
+            return response 
+
+api.add_resource(Users, '/users')
+
 
 
 class Posts(Resource):

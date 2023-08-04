@@ -72,7 +72,7 @@ function LoginForm({setUser}){
 
                         <button className = "w-full bg-red-300 hover:bg-red-400 focus:ring-4 focus:outline-none font-semibold rounded-lg text-sm px-5 py-2.5 text-center " type = "submit">Login</button>
                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                            Dont have an account yet? <a href = "" className="font-medium text-red-500 hover:underline">Sign up</a>
+                            Dont have an account yet? <a href = "/users/new" className="font-medium text-red-500 hover:underline">Sign up</a>
                         </p>
                     </form>
 

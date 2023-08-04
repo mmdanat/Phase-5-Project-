@@ -2,42 +2,45 @@ import { useEffect, useState } from "react";
 import { useFormik } from 'formik';
 import { useParams } from "react-router-dom";
 
-function EditPostForm(){
-    const [postToEdit, setPostToEdit] = useState(null)
+function EditPostForm({postToEdit,updatePost}){
+    // const [postToEdit, setPostToEdit] = useState(null)
     const {post}= useParams();
     
-    useEffect(() => {
-        fetch(`/posts/${post}`)
-        .then((resp) => resp.json())
-        .then((data) => setPostToEdit(data))
 
-    },[])
+    
 
-    // function handlePostEdit(e){
-    //     e.preventDefault()
-    //    const navigate =useNavigate()
+    console.log(post)
+    const formik = useFormik({
+        initialValues: {
+        title: postToEdit.title,
+        body: postToEdit.body,
+        image: postToEdit.image,
 
-        const formik = useFormik({
-            initialValues: {
-            title: '',
-            body: '',
-            image: '',
+        
+        },
+        onSubmit: values => {
+            fetch(`/posts/${post}`,{
+                method:"PATCH",
+                headers: {
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify(values)
+            })
+            .then(resp =>{
+                if (resp.ok) {
+                    resp.json().then(post =>{
+                        updatePost(post)
+                    })
+                }
+
+            })
             
-            },
-            onSubmit: values => {
-                fetch(`/posts/${post}`,{
-                    method:"PATCH",
-                    headers: {
-                        "Content-Type":"application/json"
-                    },
-                    body: JSON.stringify(values)
-                })
-                    .then(resp => resp.json())
-                    .then()
-            }
-        }); 
+                
+        }
+    }); 
+    
 
-    //  }
+    
     
    return(
 
@@ -52,7 +55,7 @@ function EditPostForm(){
                         name ="title"
                         type = "text" 
                         onChange = {formik.handleChange}
-                        value = {formik.values.postToEdit} 
+                        value = {formik.values.title} 
                     />
                 </div>
 
@@ -63,7 +66,7 @@ function EditPostForm(){
                         name = "body"
                         type = "text"
                         onChange = {formik.handleChange}
-                        value = {formik.values.postToEdit} />
+                        value = {formik.values.body} />
                 </div>
                 <div>
                     <label>Image</label>
@@ -72,7 +75,7 @@ function EditPostForm(){
                         name = "image"
                         type = "text"
                         onChange = {formik.handleChange}
-                        value = {formik.values.postToEdit} />
+                        value = {formik.values.image} />
                 </div>
                 {/* <div>
                     <label>Category</label>
@@ -81,7 +84,7 @@ function EditPostForm(){
                         name = "category"
                         type = "text"
                         onChange = {formik.handleChange}
-                        value = {formik.values.postToEdit} />
+                        value = {formik.values.category_type} />
                 </div> */}
                 <div>
                     <button type = "submit">Edit Post</button>

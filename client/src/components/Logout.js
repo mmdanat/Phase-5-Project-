@@ -1,9 +1,12 @@
 
 import { Link ,useNavigate} from "react-router-dom";
+import {UserContext} from "./App"
+import { useContext } from "react";
 
 
 function Logout({setUser}){
     const navigate = useNavigate()
+    const [user] = useContext(UserContext)
 
     function handleLogout(){
         fetch('/logout',{
@@ -18,7 +21,11 @@ function Logout({setUser}){
 
     return(
         <div>
-            <button onClick = {handleLogout}>Logout</button>
+            
+            <button onClick = {handleLogout}>
+            {user ? 'Logout' : ''}
+            </button>
+            
         </div>
     )
 }
