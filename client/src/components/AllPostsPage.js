@@ -12,8 +12,10 @@ function AllPostsPage({posts}){
         title = {post.title}
         body = {post.body}
         image = {post.image}
-        likes = {post.likes}   
+        likes = {post.likes}  
+        
     />)
+    console.log(renderposts)
 
 
     return(

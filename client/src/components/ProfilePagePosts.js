@@ -18,22 +18,6 @@ function ProfilePagePosts({title,body,image,likes,id,handleEdit,post,setPosts}){
         //would like to make a pop up to ask if the user is sure that they want to delete #TODO
     }
 
-
-
-    // useEffect(()=>{
-    //     fetch(`/posts/${id}`)
-    //         .then((resp) =>resp.json())
-    //         .then(posts => setPosts(posts))
-
-        
-    // },[])
-
-
-    // function handlePatchClick(){
-     
-    //    navigate(`/posts/${id}/edit`)
-        
-    //    }
     
 
     return(

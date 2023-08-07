@@ -27,29 +27,32 @@ function App() {
   const [postToEdit, setPostToEdit] = useState(null)
   const [signedIn, setSignedIn] = useState(false)
 
-  console.log(user)
+  // console.log(user)
 
-  // useEffect(()=> {
-  //   fetch("/check_session").then((resp) => {
-  //     if (resp.ok){
-  //       resp.json().then((user) =>setUser(user))
-  //     }
-  //   });
-  // },[]);
+  useEffect(()=> {
+    fetch("/check_session").then((resp) => {
+      if (resp.ok){
+        resp.json().then((user) =>setUser(user))
+      }
+    });
+  },[]);
+
   useEffect(() =>{
     fetch('/all_posts')
     .then((response) => response.json())
     .then((posts) => setPosts(posts));
   },[])
+  // console.log(posts)
   
 
   const addPost = (post) => {
-    setPosts(posts => [post,...posts])
+    setPosts(posts => [post, ...posts])
   }
+  
 
-  const addUser = (new_user) => {
-    setUser(user => [new_user,...user])
-  }
+  // const addUser = (new_user) => {
+  //   setUser(user => [new_user,...user])
+  // }
 
   const handleEdit = (posts) => {
     setPostToEdit(posts)
@@ -60,7 +63,7 @@ function App() {
   
   const updatePost = (postToEdit) => {
     setPosts(posts => posts.map((post)=>{
-      if (post.id = postToEdit.id){
+      if (post.id == postToEdit.id){
         return postToEdit
       }else{
         return post
@@ -74,13 +77,12 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className="bg-color">
       <UserContext.Provider value = {[user ,signedIn, setSignedIn]}>
         <NavBar user ={user} />
         <Logout setUser = {setUser}/>
       </UserContext.Provider>
-      {/* <NavBar user = {user}/>
-      <Logout setUser = {setUser}/> */}
+     
 
       <Routes>
         
@@ -93,7 +95,7 @@ function App() {
 
         <Route
           exact path = '/users/new'
-          element = {<SignUpForm addUser = {addUser}/>}
+          element = {<SignUpForm />}
         
         />
         <Route

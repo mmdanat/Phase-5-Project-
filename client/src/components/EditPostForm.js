@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useFormik } from 'formik';
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 
 function EditPostForm({postToEdit,updatePost}){
     // const [postToEdit, setPostToEdit] = useState(null)
     const {post}= useParams();
+    const navigate =useNavigate()
     
 
     
@@ -30,6 +31,7 @@ function EditPostForm({postToEdit,updatePost}){
                 if (resp.ok) {
                     resp.json().then(post =>{
                         updatePost(post)
+                        navigate('/all_posts')
                     })
                 }
 

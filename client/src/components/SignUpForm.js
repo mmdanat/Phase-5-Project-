@@ -24,10 +24,9 @@ function SignUpForm({addUser}){
             })
                 .then(resp => {
                     if (resp.ok) {
-                        resp.json().then(new_user => {
-                            addUser(new_user)
+                        resp.json().then(
                             navigate('/login')
-                        } )
+                         )
                     }
                     else{
                         navigate('/users/new')

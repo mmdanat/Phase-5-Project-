@@ -31,10 +31,10 @@ function CreateNewPostForm({addPost}){
 
     return (
         <>
-            <h1>Hello Create a post here </h1>
+            <h1>Create a post here </h1>
             <form onSubmit = {formik.handleSubmit}>
                 <div>
-                    <label>Recipie : Name and Ingredients</label>
+                    <label>Recipe : Name </label>
                     <div>
                     <input
                         id = "title"
@@ -45,40 +45,41 @@ function CreateNewPostForm({addPost}){
                     
                     />
                     </div>
-                    <label>Instructions</label>
+                    <label>Ingredients and Instructions</label>
                     <div>
-                    <input
-                        id = "body"
-                        name = "body"
-                        type = "text"
-                        onChange = {formik.handleChange}
-                        value = {formik.values.body}
-                    
-                    />
+                        <textarea
+                            id = "body"
+                            name = "body"
+                            type = "text"
+                            onChange = {formik.handleChange}
+                            value = {formik.values.body}>
+                        </textarea>
+                        
                     </div>
                     <label>Image</label>
                     <div>
-                    <input
-                        id ="image"
-                        name = "image"
-                        type = "text"
-                        onChange = {formik.handleChange}
-                        value = {formik.values.image}
-                    />
+                        <input
+                            id ="image"
+                            name = "image"
+                            type = "text"
+                            onChange = {formik.handleChange}
+                            value = {formik.values.image}
+                        />
                     </div>
                     <label>Username</label>
                     <div>
-                    <input
-                        id = "username"
-                        name ="username"
-                        type = "text"
-                        onChange = {formik.handleChange}
-                        value = {formik.values.username} 
-                    
-                    />
+                        <input
+                            id = "username"
+                            name ="username"
+                            type = "text"
+                            onChange = {formik.handleChange}
+                            value = {formik.values.username} 
+                        
+                        />
                     </div>
-                    {/* want to make this a drop down category  */}
-                    <label>Category</label> 
+                    
+                    <label>Category: Food or Drink?</label> 
+                   
                     <input
                         id = "category"
                         name ="category"

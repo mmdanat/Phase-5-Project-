@@ -91,6 +91,7 @@ class Posts(Resource):
                 body = request_json['body'],
                 user_id = user_id_match,
                 category_id = category_row_match,
+                image = request_json['image'],
                 likes = 0
                     
             )
@@ -191,21 +192,21 @@ class PostsbyID(Resource):
 api.add_resource(PostsbyID,'/posts/<int:id>')
 
 
-# class CheckSession(Resource):
-#     def get(self):
-#         user_id = session.get('user_id')
+class CheckSession(Resource):
+    def get(self):
+        user_id = session.get('user_id')
 
         
-#         if user_id:
+        if user_id:
 
-#             user_row = User.query.filter(User.id == session.get('user_id')).first()
-#             response = make_response(user_row.to_dict() ,200)
-#             return response 
-#         else:
-#             response = make_response({'message': '401: Not Authorized'}, 401)
-#             return response 
+            user_row = User.query.filter(User.id == session.get('user_id')).first()
+            response = make_response(user_row.to_dict() ,200)
+            return response 
+        else:
+            response = make_response({'message': '401: Not Authorized'}, 401)
+            return response 
         
-# api.add_resource(CheckSession, '/check_session')
+api.add_resource(CheckSession, '/check_session')
 
 class Login(Resource):   
     def post(self):
