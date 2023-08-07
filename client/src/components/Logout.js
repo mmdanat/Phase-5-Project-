@@ -20,7 +20,7 @@ function Logout({setUser}){
     
 
     return(
-        <div>
+        <div className="md:ml-auto flex flex-wrap items-center text-base justify-center">
             
             <button onClick = {handleLogout}>
             {user ? 'Logout' : ''}

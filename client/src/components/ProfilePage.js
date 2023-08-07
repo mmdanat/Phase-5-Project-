@@ -19,7 +19,7 @@ function ProfilePage({user, setUser, handleEdit,posts,setPosts}){
         
 
     },[]) 
-    console.log(user)
+    
     let render_user_posts = []
     if (user) {
         const users_posts = user.posts 
@@ -52,8 +52,9 @@ function ProfilePage({user, setUser, handleEdit,posts,setPosts}){
         <div>
             {/* <NavBar/> */}
             {/* {`Hello ${user.first_name}`} */}
-            <div><button onClick = {handleClick}>Create Post</button></div>
             {render_user_posts}
+            <div><button onClick = {handleClick}>Create Post</button></div>
+            
             
             
             

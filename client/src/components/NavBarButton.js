@@ -9,11 +9,11 @@ function NavBarButton(){
     const [user,signedIn, setSignedIn] = useContext(UserContext)
     // console.log(user)
     
-
+    
     return(
         <div>
             <button onClick = {() => setSignedIn(user)}>
-                {user ? `Welcome back ${user.first_name}` : ''}
+                {user ? ` Hello ${user.first_name}` : ''}
             </button>
 
         </div>

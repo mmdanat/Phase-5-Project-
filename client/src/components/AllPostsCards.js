@@ -8,9 +8,10 @@ function AllPostsCards({title,body,image,likes,id}){
                     <div className=''><img className="" src={image} alt={title} /></div>
                 </div>
                 <div className=''>
-                    <div className=''> Post Title{title}</div>
-                    <p className=''> Post body:{body}</p>
-                    <p className=''> likes:{likes}</p>
+                    <div className=''> {title}</div>
+                    <p className=''> Recipe:{body}</p>
+                    <p className=''> ❤️{likes}</p>
+                    
                     
                 </div>
                 
