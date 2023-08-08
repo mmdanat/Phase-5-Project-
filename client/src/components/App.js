@@ -1,5 +1,5 @@
 import { useEffect,useState,createContext,useContext} from 'react';
-import { Routes, Route,useNavigate} from 'react-router-dom'
+import { useParams,Routes, Route,useNavigate} from 'react-router-dom'
 
 
 import LoginForm from './LoginForm';
@@ -11,6 +11,9 @@ import NavBar from './NavBar';
 import CreateNewPostForm from './CreateNewPostForm';
 import EditPostForm from './EditPostForm';
 import SignUpForm from './SignUpForm';
+import Comments from  './Comments';
+
+
 
 
 export const UserContext = createContext();
@@ -18,6 +21,8 @@ export const UserContext = createContext();
 function App() {
 
   const navigate = useNavigate()
+  const {post}= useParams();
+
   // const UserContext = createContext()
   
  
@@ -26,6 +31,8 @@ function App() {
   const [user,setUser] = useState("")
   const [postToEdit, setPostToEdit] = useState(null)
   const [signedIn, setSignedIn] = useState(false)
+  const [comments, setComments] =useState([])
+  
 
   // console.log(user)
 
@@ -42,17 +49,12 @@ function App() {
     .then((response) => response.json())
     .then((posts) => setPosts(posts));
   },[])
-  // console.log(posts)
   
 
   const addPost = (post) => {
     setPosts(posts => [post, ...posts])
   }
   
-
-  // const addUser = (new_user) => {
-  //   setUser(user => [new_user,...user])
-  // }
 
   const handleEdit = (posts) => {
     setPostToEdit(posts)
@@ -71,13 +73,13 @@ function App() {
 
     }))
   }
-  
-  
-  
 
+  
+  
 
   return (
-    <div className="bg-color">
+    <div className="">
+      
       <UserContext.Provider value = {[user ,signedIn, setSignedIn]}>
         <NavBar user ={user} />
         <Logout setUser = {setUser}/>
@@ -100,7 +102,7 @@ function App() {
         />
         <Route
           exact path = '/all_posts'
-          element = {<AllPostsPage posts = {posts} setUser = {setUser}/> }
+          element = {<AllPostsPage setPosts = {setPosts} user = {user} posts = {posts} setUser = {setUser} /> }
         />
         
         <Route
@@ -108,8 +110,6 @@ function App() {
           element = {<ProfilePage user = {user} setUser = {setUser} handleEdit = {handleEdit} posts = {posts} setPosts ={setPosts} />}
         />
         
-
-
         <Route
           exact path = 'all_posts/new'
           element = {<CreateNewPostForm addPost = {addPost} />}

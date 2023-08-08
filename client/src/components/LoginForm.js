@@ -52,7 +52,7 @@ function LoginForm({setUser}){
     return (
         <div className = "flex flex-col items-center justify-center px-6 py-8 mx-auto border-black">
             <a className = 'flex items-center mb-6 text-2xl text-grey-900 border-solid'>
-                <img className = "w-10 h-8 mr-2"src = 'https://media.istockphoto.com/id/1137640747/vector/yummy-smile-vector-eating-emoji-face-icon.jpg?s=612x612&w=0&k=20&c=maEPAROCGT2W0wIZ9GmUk3dKDJIrFCxxehOntgUfVTs=' />
+                <img className = "w-10 h-8 mr-2 "src = 'https://media.istockphoto.com/id/1137640747/vector/yummy-smile-vector-eating-emoji-face-icon.jpg?s=612x612&w=0&k=20&c=maEPAROCGT2W0wIZ9GmUk3dKDJIrFCxxehOntgUfVTs=' />
                 Eat Together
             </a>
             <div className = "w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:border-gray-700" >

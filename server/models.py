@@ -108,7 +108,7 @@ class Comment(db.Model,SerializerMixin):
 
 
     #seralize_rules 
-    serialize_rules = ('-posts.comment')
+    serialize_rules = ('-posts.comment',)
 
 
 
