@@ -2,6 +2,7 @@ import {useNavigate, useParams} from "react-router-dom"
 import { useEffect,useState} from 'react';
 
 
+
 function ProfilePagePosts({title,body,image,likes,id,handleEdit,post,setPosts}){
     
     
@@ -26,9 +27,10 @@ function ProfilePagePosts({title,body,image,likes,id,handleEdit,post,setPosts}){
             <div className=''> Post Title:{title}</div>
             <img className ='' src = {image} alt = {title}/>
             <p className=''> Post body:{body}</p>
-            <p className=''> Likes:{likes}</p>
+            {/* <p className=''> Likes:{likes}</p> */}
             <div><button onClick = {handleClick}>Delete Post</button></div>
             <div><button onClick={() => handleEdit(post)}>Edit Post</button></div>
+           
         
         </div>
     )

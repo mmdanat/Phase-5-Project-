@@ -1,7 +1,8 @@
 import AllPostsCards from "./AllPostsCards";
 import NavBar from "./NavBar";
+import Comments from "./Comments";
 
-function AllPostsPage({posts}){
+function AllPostsPage({posts, user, setPosts}){
 
 
     const renderposts = posts.map((post)=> 
@@ -13,15 +14,20 @@ function AllPostsPage({posts}){
         body = {post.body}
         image = {post.image}
         likes = {post.likes}  
+        user = {user}
+        posts = {posts}
+        setPosts = {setPosts}
+        
+        
         
     />)
-    console.log(renderposts)
 
 
     return(
         <div>
             {/* <NavBar/> */}
             {renderposts}
+            
         </div>
     )
 }

@@ -68,6 +68,7 @@ class Posts(Resource):
     def get(self):
         all_posts = [post.to_dict() for post in Post.query.all()]
 
+
         response = make_response(all_posts,200)
         return response
     
@@ -107,9 +108,9 @@ class Posts(Resource):
                 
             return response 
             
-    def patch(self): #maybe this is for the like button ?
+    def patch(self): 
 
-        all_posts = [post.to_dict() for post in Post.query.all()]
+        all_posts = [post for post in Post.query.all()]
 
         if all_posts:
 
@@ -139,6 +140,41 @@ class Posts(Resource):
 api.add_resource(Posts,'/all_posts')
 
 
+class AllComments(Resource):
+    def get(self):
+        comments = [comment.to_dict() for comment in Comment.query.all()]
+        
+    
+        response = make_response(comments,200)
+        return response
+        
+        
+    
+    def post(self):
+        try:
+            request_json = request.get_json()
+            print(request_json)
+            new_comment = Comment(
+                text = request_json['text'],
+                post_id = request_json['post_id']
+                
+            )
+
+            db.session.add(new_comment)
+            db.session.commit()
+
+            response = make_response(new_comment.to_dict(), 200)
+            return response 
+        except ValueError:
+
+            response = make_response({"errors": ["validation errors"]},400)
+
+            return response
+
+
+api.add_resource(AllComments,'/all_comments')
+
+
 
 class PostsbyID(Resource):
     def get(self,id):
@@ -157,7 +193,7 @@ class PostsbyID(Resource):
             try:
             
                 request_json = request.get_json()
-
+                
                 for key in request_json:
                     setattr(posts_by_id,key,request_json[key])
 
@@ -185,6 +221,8 @@ class PostsbyID(Resource):
         response = make_response('sucessfully deleted', 204)
 
         return response 
+    
+    
 
 
 
