@@ -30,13 +30,15 @@ function CreateNewPostForm({addPost}){
     }); 
 
     return (
-        <>
-            <h1>Create a post here </h1>
-            <form onSubmit = {formik.handleSubmit}>
-                <div>
-                    <label>Recipe : Name </label>
+        <div className = 'flex border my-3'>
+            
+            <form className = "w-1/4 m-5" onSubmit = {formik.handleSubmit}>
+                <div className = ''>
+                    <h1 className = 'my-3'>Share what you are cooking!</h1>
+                    
                     <div>
-                    <input
+                    <label>Recipe Name</label>
+                    <input className="rounded border my3"
                         id = "title"
                         name ="title"
                         type = "text"
@@ -45,9 +47,10 @@ function CreateNewPostForm({addPost}){
                     
                     />
                     </div>
-                    <label>Ingredients and Instructions</label>
-                    <div>
-                        <textarea
+                    
+                    <div className = 'my-3'>
+                        <label >Ingredients and Instructions</label>
+                        <textarea className="rounded border p-10 my-3"
                             id = "body"
                             name = "body"
                             type = "text"
@@ -56,9 +59,10 @@ function CreateNewPostForm({addPost}){
                         </textarea>
                         
                     </div>
-                    <label>Image</label>
+                    
                     <div>
-                        <input
+                        <label>Image(URL)</label>
+                        <input className="rounded border "
                             id ="image"
                             name = "image"
                             type = "text"
@@ -66,9 +70,10 @@ function CreateNewPostForm({addPost}){
                             value = {formik.values.image}
                         />
                     </div>
-                    <label>Username</label>
+                    
                     <div>
-                        <input
+                        <label>Username</label>
+                        <input className="rounded border "
                             id = "username"
                             name ="username"
                             type = "text"
@@ -77,22 +82,22 @@ function CreateNewPostForm({addPost}){
                         
                         />
                     </div>
-                    
-                    <label>Category: Food or Drink?</label> 
-                   
-                    <input
-                        id = "category"
-                        name ="category"
-                        type = "text"
-                        onChange = {formik.handleChange}
-                        value = {formik.values.category} 
-                    
-                    />
+                    <div>
+                        <label>Category: Food or Drink?</label> 
+                        <input className="rounded border "
+                            id = "category"
+                            name ="category"
+                            type = "text"
+                            onChange = {formik.handleChange}
+                            value = {formik.values.category} 
+                        
+                        />
+                    </div>
                 </div>
-                <button type ="submit" >Submit</button>
+                <button className = ' bg-red-300 hover:bg-red-400 focus:ring-4 focus:outline-none rounded-lg text-sm px-5 py-1.5 my-3 text-center ' type ="submit" >Submit</button>
             </form>
            
-        </>
+        </div>
     )
 
 }

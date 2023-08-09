@@ -13,7 +13,7 @@ function NavBarButton(){
     return(
         <div>
             <button onClick = {() => setSignedIn(user)}>
-                {user ? `Welcome back ${user.first_name}!` : ''}
+                {user ? `Welcome ${user.first_name}!` : ''}
             </button>
 
         </div>
