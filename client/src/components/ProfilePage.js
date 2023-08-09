@@ -49,11 +49,11 @@ function ProfilePage({user, setUser, handleEdit,posts,setPosts}){
   
     return(
 
-        <div>
+        <div className = 'flex border '>
             {/* <NavBar/> */}
             {/* {`Hello ${user.first_name}`} */}
             {render_user_posts}
-            <div><button onClick = {handleClick}>Create Post</button></div>
+            <div className = '  bg-red-300 hover:bg-red-400 focus:ring-4 focus:outline-none rounded-lg text-sm px-5 py-2.5 text-center '><button onClick = {handleClick}>Create Post</button></div>
             
             
             
