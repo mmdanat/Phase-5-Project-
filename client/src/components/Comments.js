@@ -31,7 +31,7 @@ function Comments({posts,postId}){
     return(
         <div>
             <div className = 'tracking-widest text-sm title-font font-medium'>Comments</div>
-            <div className = ''>{render_comments}</div>
+            <div className = 'my-3'>{render_comments}</div>
             <CommentForm setComments = {setComments} comments = {comments} postId = {postId}/>
 
         </div>

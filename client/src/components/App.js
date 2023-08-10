@@ -22,11 +22,6 @@ function App() {
 
   const navigate = useNavigate()
   const {post}= useParams();
-
-  // const UserContext = createContext()
-  
- 
-
   const [posts,setPosts] =useState([])
   const [user,setUser] = useState("")
   const [postToEdit, setPostToEdit] = useState(null)
@@ -34,7 +29,6 @@ function App() {
   const [comments, setComments] =useState([])
   
 
-  // console.log(user)
 
   useEffect(()=> {
     fetch("/check_session").then((resp) => {
@@ -79,12 +73,14 @@ function App() {
 
   return (
     <div className="">
+      <div className = 'flex'>
       
-      <UserContext.Provider value = {[user ,signedIn, setSignedIn]}>
-        <NavBar user ={user} />
-        <Logout setUser = {setUser}/>
-      </UserContext.Provider>
-     
+        <UserContext.Provider value = {[user ,signedIn, setSignedIn]}>
+          <NavBar user ={user} />
+          <Logout setUser = {setUser}/>
+        </UserContext.Provider>
+        
+      </div>     
 
       <Routes>
         
@@ -118,7 +114,7 @@ function App() {
 
         <Route
           exact path = '/posts/:post/edit'
-          element = {<EditPostForm postToEdit = {postToEdit} updatePost = {updatePost}/>}
+          element = {<EditPostForm postToEdit = {postToEdit} updatePost = {updatePost} user = {user}/>}
         />
 
       </Routes>
