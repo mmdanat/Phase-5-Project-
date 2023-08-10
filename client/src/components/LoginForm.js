@@ -64,10 +64,10 @@ function LoginForm({setUser}){
                     <form onSubmit = {handleLogin} className = "space-y-4 md:space-y-6" >
                         
                         <label className="block mb-2 text-sm font-medium ">Username</label>
-                        <input id = "username" type = "text" required placeholder = "ex: space_master77"className = "bg-gray-50 border border-gray-300 text-zinc-300 sm:text-sm rounded-md block w-full h-6"/>
+                        <input id = "username" type = "text" required placeholder = "ex: space_master77" className = "bg-gray-50 border border-gray-300 text-zinc-500 dark:placeholder:text-neutral-200 sm:text-sm rounded-md block w-full h-8"/>
                         
                         <label className="block mb-2 text-sm font-medium ">Password</label>
-                        <input id = "password" type = "text" placeholder = "••••••••" className = "bg-gray-50 border border-gray-300 text-zinc-300 sm:text-sm rounded-md block w-full h-6"/>
+                        <input id = "password" type = "password" placeholder = "••••••••" className = "bg-gray-50 border border-gray-300 text-zinc-500 dark:placeholder:text-neutral-200 sm:text-sm rounded-md block w-full h-8"/>
                         
 
                         <button className = "w-full bg-red-300 hover:bg-red-400 focus:ring-4 focus:outline-none font-semibold rounded-lg text-sm px-5 py-2.5 text-center " type = "submit">Login</button>

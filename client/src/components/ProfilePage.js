@@ -40,24 +40,14 @@ function ProfilePage({user, setUser, handleEdit,posts,setPosts}){
        return ("loading....unable to find user, please login")
     } 
 
-   function handleClick(){
-
-    navigate('/all_posts/new')
-
-   }
 
   
     return(
 
-        <div className = 'flex border '>
-            {/* <NavBar/> */}
-            {/* {`Hello ${user.first_name}`} */}
+        <div className = 'grid grid-cols-3'>
+           
             {render_user_posts}
-            <div className = '  bg-red-300 hover:bg-red-400 focus:ring-4 focus:outline-none rounded-lg text-sm px-5 py-2.5 text-center '><button onClick = {handleClick}>Create Post</button></div>
-            
-            
-            
-            
+ 
 
         </div>
     )

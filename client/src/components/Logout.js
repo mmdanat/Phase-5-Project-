@@ -20,10 +20,10 @@ function Logout({setUser}){
     
 
     return(
-        <div className="md:ml-auto flex flex-wrap items-center text-base justify-center">
+        <div className="md:ml-auto mr-12 flex flex-wrap items-center ">
             
             <button onClick = {handleLogout}>
-            {user ? 'Logout' : ''}
+            <div className = 'mr-5 text-red-300 hover:text-red-400 uppercase text-xl'>{user ? 'Logout' : ''}</div>
             </button>
             
         </div>

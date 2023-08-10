@@ -35,9 +35,9 @@ function AllPostsCards({title,body,image,likes,id,user,posts, setPosts}){
     return(
 
         <div className = 'text-gray-600 body-font '>
-            <div className = 'container px-5 py20 mx-auto border  '>
-                <div className ='flex flex-wrap m-4'>
-                    <div className = 'p-4 md:w-1/3'>
+            <div className = 'container px-10 py-10 mx-auto border'>
+                <div className ='flex justify-center'>
+                    <div className = ' md:w-2/3'>
                         <div className = 'h-full bg-slate-100 bg-opacity-75 px-2 pt-4 pb-6 overflow-hidden rounded-md'>
                             <div>
                                 <div ><img src={image} alt={title} /></div>
