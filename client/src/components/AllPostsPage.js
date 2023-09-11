@@ -15,7 +15,6 @@ function AllPostsPage({posts, user, setPosts}){
         image = {post.image}
         likes = {post.likes}  
         user = {user}
-        posts = {posts}
         setPosts = {setPosts}
         
         
