@@ -23,7 +23,7 @@ function AllPostsCards({title,body,image,likes,id,user,posts, setPosts}){
                 }else{
                     return post
                 }
-
+            
             })
             setPosts(new_posts)
           })
@@ -60,5 +60,5 @@ function AllPostsCards({title,body,image,likes,id,user,posts, setPosts}){
     )
 }
 
-
+// if likes.value == ""
 export default AllPostsCards;

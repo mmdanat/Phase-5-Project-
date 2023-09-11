@@ -5,13 +5,14 @@ function CommentForm({setComments, comments,postId}){
 
 
     const navigate =useNavigate()
-    
+
+
 
     const formik = useFormik({
         initialValues: {
           text: '',
         },
-        onSubmit: values => {
+        onSubmit: (values, actions) => {
             fetch("/all_comments",{
                 method:"POST",
                 headers: {
@@ -27,6 +28,11 @@ function CommentForm({setComments, comments,postId}){
                 .then((comment) =>{
                     
                     setComments([...comments,comment])
+                    actions.resetForm({
+                        values: {
+                            text:'',
+                        }
+                    })
                     
                     
                 })

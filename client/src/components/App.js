@@ -1,5 +1,7 @@
-import { useEffect,useState,createContext,useContext} from 'react';
-import { useParams,Routes, Route,useNavigate} from 'react-router-dom'
+
+import { useEffect,useState,createContext} from 'react';
+
+import {Routes, Route,useNavigate} from 'react-router-dom'
 
 
 import LoginForm from './LoginForm';
@@ -11,7 +13,7 @@ import NavBar from './NavBar';
 import CreateNewPostForm from './CreateNewPostForm';
 import EditPostForm from './EditPostForm';
 import SignUpForm from './SignUpForm';
-import Comments from  './Comments';
+
 
 
 
@@ -21,12 +23,12 @@ export const UserContext = createContext();
 function App() {
 
   const navigate = useNavigate()
-  const {post}= useParams();
+  
   const [posts,setPosts] =useState([])
   const [user,setUser] = useState("")
   const [postToEdit, setPostToEdit] = useState(null)
   const [signedIn, setSignedIn] = useState(false)
-  const [comments, setComments] =useState([])
+  
   
 
 
@@ -59,7 +61,7 @@ function App() {
   
   const updatePost = (postToEdit) => {
     setPosts(posts => posts.map((post)=>{
-      if (post.id == postToEdit.id){
+      if (post.id === postToEdit.id){
         return postToEdit
       }else{
         return post
@@ -76,7 +78,7 @@ function App() {
       <div className = 'flex'>
       
         <UserContext.Provider value = {[user ,signedIn, setSignedIn]}>
-          <NavBar user ={user} />
+          <NavBar />
           <Logout setUser = {setUser}/>
         </UserContext.Provider>
         
