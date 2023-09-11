@@ -54,7 +54,6 @@ class User(db.Model, SerializerMixin):
 
 
 
-
     #validations 
     @validates('username')
     def validates_username(self,key,username):
