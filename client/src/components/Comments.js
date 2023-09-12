@@ -10,13 +10,13 @@ function Comments({posts,postId}){
         .then((response) => response.json())
         .then((comments) => {
             const post_comments = comments.filter((comment)=>{
-                return comment.id === postId
+                return comment.post_id === postId
 
             })
 
             setComments(post_comments)
         });
-      },[])
+      },[postId])
       
     
     
