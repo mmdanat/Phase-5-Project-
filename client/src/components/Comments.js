@@ -10,7 +10,7 @@ function Comments({posts,postId}){
         .then((response) => response.json())
         .then((comments) => {
             const post_comments = comments.filter((comment)=>{
-                return comment.id == postId
+                return comment.id === postId
 
             })
 
