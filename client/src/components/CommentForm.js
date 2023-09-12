@@ -11,7 +11,7 @@ function CommentForm({setComments, comments,postId}){
         initialValues: {
           text: '',
         },
-        onSubmit: values => {
+        onSubmit: (values, actions) => {
             fetch("/all_comments",{
                 method:"POST",
                 headers: {
@@ -24,10 +24,13 @@ function CommentForm({setComments, comments,postId}){
                 })
             })
                 .then(resp => resp.json())
-                .then((comment) =>{
-                    
+                .then((comment) =>{                    
                     setComments([...comments,comment])
-                    
+                    actions.resetForm({
+                        values:{
+                            text:"",
+                        }
+                    })
                     
                 })
         }
