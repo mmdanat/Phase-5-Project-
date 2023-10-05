@@ -26,8 +26,8 @@ function App() {
   const [user,setUser] = useState("")
   const [postToEdit, setPostToEdit] = useState(null)
   const [signedIn, setSignedIn] = useState(false)
-  
-  
+  const [ searchTerm, setSearchTerm ] = useState("")
+
 
 
   useEffect(()=> {
@@ -49,7 +49,7 @@ function App() {
     setPosts(posts => [post, ...posts])
   }
   
-
+  
   const handleEdit = (posts) => {
     setPostToEdit(posts)
     navigate(`/posts/${posts.id}/edit`)
@@ -68,15 +68,35 @@ function App() {
     }))
   }
 
+  const filteredPosts = posts.filter((post) => {
+    return post.title.toLowerCase().includes(searchTerm.toLowerCase())
+  })
   
+  // function handleSearch(e){
+  //   e.preventDefault()
+  //   if(searchTerm!==undefined){
+  //     console.log(e.target.searchTerm.value)
+  //   }
+    
+
+  // }
+   
+  function handleSearch(e) {
+      e.preventDefault()
+     
+      setSearchTerm(e.target.searchTerm.value)
+  }
+ 
+
   
+
 
   return (
     <div className="">
       <div className = 'flex'>
       
         <UserContext.Provider value = {[user ,signedIn, setSignedIn]}>
-          <NavBar user ={user} />
+          <NavBar user ={user} posts = {posts} handleSearch = {handleSearch}/>
           <Logout setUser = {setUser}/>
         </UserContext.Provider>
         
@@ -98,7 +118,7 @@ function App() {
         />
         <Route
           exact path = '/all_posts'
-          element = {<AllPostsPage setPosts = {setPosts} user = {user} posts = {posts} setUser = {setUser} /> }
+          element = {<AllPostsPage setPosts = {setPosts} user = {user} posts = {posts} setUser = {setUser} filteredPosts = {filteredPosts}/> }
         />
         
         <Route
