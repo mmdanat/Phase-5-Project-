@@ -1,10 +1,10 @@
 import AllPostsCards from "./AllPostsCards";
 
 
-function AllPostsPage({posts, user, setPosts}){
+function AllPostsPage({posts, user, setPosts,filteredPosts}){
 
 
-    const renderposts = posts.map((post)=> 
+    const renderposts = filteredPosts.map((post)=> 
        
     <AllPostsCards
         key ={post.id}

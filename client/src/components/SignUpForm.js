@@ -104,6 +104,11 @@ function SignUpForm({addUser}){
                                 </div>
                             
                             <button className = "w-full bg-red-300 hover:bg-red-400 focus:ring-4 focus:outline-none font-semibold rounded-lg text-sm px-5 py-2.5 text-center " type ="submit" >Submit</button>
+                            <p className="text-sm font-light text-gray-500 dark:text-gray-400 text-center">
+                                Return to 
+                                <a href = "/login" className="font-medium text-red-500 hover:underline"> Sign In?</a>
+                            </p>
+                            
                         </form>
                     </div>
                 </div>

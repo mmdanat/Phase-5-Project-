@@ -46,6 +46,7 @@ function CommentForm({setComments, comments,postId}){
                         <div className = "my-2"><label >Add Comment</label></div>
                         <textarea className="peer block min-h-[auto] w-full rounded bg-white px-3 py-[0.32rem] leading-[1.6] transition-all ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                             id = "text"
+                            key = ""
                             name = "text"
                             type = "text"
                             onChange = {formik.handleChange}
